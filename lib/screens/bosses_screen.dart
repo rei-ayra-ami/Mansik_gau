@@ -7,16 +7,37 @@ class BossesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(20),
-      children: const [
+      children: [
         ListTile(
-          leading: Icon(Icons.coronavirus, color: Colors.redAccent),
-          title: Text('Monstro'),
-          subtitle: Text('Первый босс. Прыгает и плюёт кровью.'),
+          leading: Image.asset(
+            'assets/images/bosses/monstro.png',
+            width: 50,
+            height: 50,
+          ),
+          title: const Text(
+            'Monstro',
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          subtitle: const Text(
+            'Первый босс. Прыгает и плюёт кровью.',
+            style: TextStyle(color: Colors.white70),
+          ),
         ),
+        const SizedBox(height: 16),
         ListTile(
-          leading: Icon(Icons.coronavirus_outlined, color: Colors.redAccent),
-          title: Text('Isaac'),
-          subtitle: Text('Финальный бой с самим собой.'),
+          leading: Image.asset(
+            'assets/images/bosses/isaac.png',
+            width: 50,
+            height: 50,
+          ),
+          title: const Text(
+            'Isaac',
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          subtitle: const Text(
+            'Финальный бой с самим собой.',
+            style: TextStyle(color: Colors.white70),
+          ),
         ),
       ],
     );

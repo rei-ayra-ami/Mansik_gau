@@ -7,16 +7,37 @@ class CharactersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(20),
-      children: const [
+      children: [
         ListTile(
-          leading: Icon(Icons.person, color: Colors.redAccent),
-          title: Text('Isaac'),
-          subtitle: Text('Начальный персонаж, сбалансированные характеристики.'),
+          leading: Image.asset(
+            'assets/images/characters/isaac.png',
+            width: 50,
+            height: 50,
+          ),
+          title: const Text(
+            'Isaac',
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          subtitle: const Text(
+            'Начальный персонаж, сбалансированные характеристики.',
+            style: TextStyle(color: Colors.white70),
+          ),
         ),
+        const SizedBox(height: 16),
         ListTile(
-          leading: Icon(Icons.person_2, color: Colors.redAccent),
-          title: Text('Magdalene'),
-          subtitle: Text('Больше здоровья, но меньше скорости.'),
+          leading: Image.asset(
+            'assets/images/characters/magdalene.png',
+            width: 50,
+            height: 50,
+          ),
+          title: const Text(
+            'Magdalene',
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          subtitle: const Text(
+            'Больше здоровья, но меньше скорости.',
+            style: TextStyle(color: Colors.white70),
+          ),
         ),
       ],
     );

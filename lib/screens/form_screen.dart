@@ -97,7 +97,7 @@ class _FormScreenState extends State<FormScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: const Text('Сохранить'),
+                child: const Text('Войти'),
               ),
             ],
           ),

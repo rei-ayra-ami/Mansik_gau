@@ -7,16 +7,37 @@ class ItemsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(20),
-      children: const [
+      children: [
         ListTile(
-          leading: Icon(Icons.bubble_chart, color: Colors.redAccent),
-          title: Text('Sad Onion'),
-          subtitle: Text('↑ Скорость стрельбы'),
+          leading: Image.asset(
+            'assets/images/items/sad_onion.png',
+            width: 50,
+            height: 50,
+          ),
+          title: const Text(
+            'Sad Onion',
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          subtitle: const Text(
+            '↑ Скорость стрельбы',
+            style: TextStyle(color: Colors.white70),
+          ),
         ),
+        const SizedBox(height: 16),
         ListTile(
-          leading: Icon(Icons.local_fire_department, color: Colors.redAccent),
-          title: Text('Pentagram'),
-          subtitle: Text('↑ Урон + злой облик'),
+          leading: Image.asset(
+            'assets/images/items/pentagram.png',
+            width: 50,
+            height: 50,
+          ),
+          title: const Text(
+            'Pentagram',
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          subtitle: const Text(
+            '↑ Урон + злой облик',
+            style: TextStyle(color: Colors.white70),
+          ),
         ),
       ],
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'items_screen.dart';
 import 'bosses_screen.dart';
 import 'characters_screen.dart';
+import 'profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -141,32 +142,32 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildContent() {
-  return Expanded(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 500),
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.9), // ← почти чёрный, но слегка просвечивает
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: _screenColors[_selectedIndex].withOpacity(0.8),
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: _screenColors[_selectedIndex].withOpacity(0.5),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: _screenColors[_selectedIndex].withOpacity(0.8),
+              width: 2,
             ),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: _screenColors[_selectedIndex].withOpacity(0.5),
+                blurRadius: 12,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(12.0),
+          child: _screens[_selectedIndex],
         ),
-        padding: const EdgeInsets.all(12.0),
-        child: _screens[_selectedIndex],
       ),
-    ),
-  );
-}
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,6 +175,18 @@ class _HomeScreenState extends State<HomeScreen>
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text(_titles[_selectedIndex]),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.account_circle, size: 30),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+          ),
+        ],
       ),
       body: Stack(
         fit: StackFit.expand,
