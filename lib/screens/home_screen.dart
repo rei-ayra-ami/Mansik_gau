@@ -141,28 +141,32 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildContent() {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          decoration: BoxDecoration(
-            color: _screenColors[_selectedIndex].withOpacity(0.15),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: _screenColors[_selectedIndex].withOpacity(0.4),
-                blurRadius: 12,
-                offset: const Offset(0, 6),
-              ),
-            ],
+  return Expanded(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.9), // ← почти чёрный, но слегка просвечивает
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: _screenColors[_selectedIndex].withOpacity(0.8),
+            width: 2,
           ),
-          padding: const EdgeInsets.all(12.0),
-          child: _screens[_selectedIndex],
+          boxShadow: [
+            BoxShadow(
+              color: _screenColors[_selectedIndex].withOpacity(0.5),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ],
         ),
+        padding: const EdgeInsets.all(12.0),
+        child: _screens[_selectedIndex],
       ),
-    );
-  }
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
