@@ -1,10 +1,10 @@
-// home_screen.dart
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'items_screen.dart';
 import 'bosses_screen.dart';
 import 'characters_screen.dart';
 import 'profile_screen.dart';
+import 'search_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -66,6 +66,8 @@ class _HomeScreenState extends State<HomeScreen>
     final prefs = await SharedPreferences.getInstance();
     final name = prefs.getString('username');
 
+    if (!mounted) return; // защита от async context
+
     if (name == null || name.isEmpty) {
       _askUsername();
     } else {
@@ -78,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen>
   Future<void> _saveUsername(String name) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('username', name);
+    if (!mounted) return;
     setState(() {
       _username = name;
     });
@@ -85,10 +88,12 @@ class _HomeScreenState extends State<HomeScreen>
 
   Future<void> _askUsername() async {
     final controller = TextEditingController();
+    if (!mounted) return;
+
     await showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) {
+      builder: (dialogContext) {
         return AlertDialog(
           title: const Text('Введите имя'),
           content: TextField(
@@ -100,7 +105,11 @@ class _HomeScreenState extends State<HomeScreen>
               onPressed: () {
                 if (controller.text.isNotEmpty) {
                   _saveUsername(controller.text).then((_) {
-                    Navigator.of(context).pop();
+                    // ignore: use_build_context_synchronously
+                    if (mounted && Navigator.canPop(dialogContext)) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(dialogContext).pop();
+                    }
                   });
                 }
               },
@@ -113,10 +122,12 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void _onItemTapped(int index) {
+    if (!mounted) return;
     setState(() {
       _selectedIndex = index;
-      _animationController.reset();
-      _animationController.forward();
+      _animationController
+        ..reset()
+        ..forward();
     });
   }
 
@@ -133,7 +144,10 @@ class _HomeScreenState extends State<HomeScreen>
             fontWeight: FontWeight.bold,
             shadows: const [
               Shadow(
-                  blurRadius: 6, color: Colors.black54, offset: Offset(2, 2))
+                blurRadius: 6,
+                color: Colors.black54,
+                offset: Offset(2, 2),
+              ),
             ],
           ),
         ),
@@ -148,15 +162,15 @@ class _HomeScreenState extends State<HomeScreen>
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.9),
+            color: Colors.black.withValues(alpha: 0.9),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: _screenColors[_selectedIndex].withOpacity(0.8),
+              color: _screenColors[_selectedIndex].withValues(alpha: 0.8),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
-                color: _screenColors[_selectedIndex].withOpacity(0.5),
+                color: _screenColors[_selectedIndex].withValues(alpha: 0.5),
                 blurRadius: 12,
                 offset: const Offset(0, 6),
               ),
@@ -176,10 +190,21 @@ class _HomeScreenState extends State<HomeScreen>
       appBar: AppBar(
         title: Text(_titles[_selectedIndex]),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: () {
+            if (!mounted) return;
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SearchScreen()),
+            );
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.account_circle, size: 30),
             onPressed: () {
+              if (!mounted) return;
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ProfileScreen()),
@@ -201,8 +226,8 @@ class _HomeScreenState extends State<HomeScreen>
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Colors.black.withOpacity(0.6),
-                    Colors.black.withOpacity(0.25),
+                    Colors.black.withValues(alpha: 0.6),
+                    Colors.black.withValues(alpha: 0.25),
                   ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
@@ -220,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black.withOpacity(0.7),
+        backgroundColor: Colors.black.withValues(alpha: 0.7),
         selectedItemColor: _screenColors[_selectedIndex],
         unselectedItemColor: Colors.grey[400],
         currentIndex: _selectedIndex,

@@ -29,6 +29,7 @@ class _FormScreenState extends State<FormScreen> {
 
   Future<void> _loadSavedData() async {
     final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return; // ✅ предотвращаем ошибку async context
     _nameController.text = prefs.getString('username') ?? '';
     _emailController.text = prefs.getString('email') ?? '';
   }
@@ -39,17 +40,26 @@ class _FormScreenState extends State<FormScreen> {
     await prefs.setString('email', email);
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       final name = _nameController.text;
       final email = _emailController.text;
-      _saveData(name, email).then((_) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-      });
+
+      await _saveData(name, email);
+
+      if (!mounted) return; // ✅ безопасная проверка перед использованием context
+
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Данные сохранены: $name, $email')),
+        SnackBar(
+          content: Text('Данные сохранены: $name, $email'),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.green.withValues(alpha: 0.9),
+        ),
+      );
+
+      // Заменяем текущий экран на HomeScreen
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     }
   }
@@ -57,7 +67,12 @@ class _FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Форма ввода данных')),
+      backgroundColor: Colors.black.withValues(alpha: 0.9), // ✅ современный вариант
+      appBar: AppBar(
+        title: const Text('Форма ввода данных'),
+        centerTitle: true,
+        backgroundColor: Colors.deepOrangeAccent.withValues(alpha: 0.9),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -66,10 +81,16 @@ class _FormScreenState extends State<FormScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Имя',
-                  border: OutlineInputBorder(),
+                  labelStyle: const TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white.withValues(alpha: 0.1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
+                style: const TextStyle(color: Colors.white),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Введите имя';
@@ -80,10 +101,16 @@ class _FormScreenState extends State<FormScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _emailController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Email',
-                  border: OutlineInputBorder(),
+                  labelStyle: const TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white.withValues(alpha: 0.1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
+                style: const TextStyle(color: Colors.white),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -94,10 +121,24 @@ class _FormScreenState extends State<FormScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: const Text('Войти'),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Colors.deepOrangeAccent.withValues(alpha: 0.9),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: _submitForm,
+                  child: const Text(
+                    'Войти',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ],
           ),

@@ -36,7 +36,7 @@ class IsaacWikiApp extends StatelessWidget {
           bodySmall: TextStyle(color: Colors.white60),
         ),
         appBarTheme: const AppBarTheme(
-          color: Colors.black87,
+          backgroundColor:Colors.black87,
           titleTextStyle: TextStyle(
             fontFamily: 'MyFont', // шрифт для AppBar
             fontSize: 20,
