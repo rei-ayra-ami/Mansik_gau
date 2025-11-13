@@ -24,3 +24,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/background.jpg
+  fonts:
+    - family: MyFont
+      fonts:
+        - asset: assets/fonts/MyFont.ttf

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_screen.dart';
 import 'screens/form_screen.dart';
-import 'widgets/isaac_theme.dart';
 
 void main() {
   runApp(const IsaacWikiApp());
@@ -27,7 +26,25 @@ class IsaacWikiApp extends StatelessWidget {
     return MaterialApp(
       title: 'The Binding of Isaac Wiki',
       debugShowCheckedModeBanner: false,
-      theme: isaacTheme,
+      theme: ThemeData(
+        fontFamily: 'MyFont', // глобальный шрифт для всего приложения
+        primarySwatch: Colors.red,
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white70),
+          bodySmall: TextStyle(color: Colors.white60),
+        ),
+        appBarTheme: const AppBarTheme(
+          color: Colors.black87,
+          titleTextStyle: TextStyle(
+            fontFamily: 'MyFont', // шрифт для AppBar
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
       home: FutureBuilder<Widget>(
         future: _getStartScreen(),
         builder: (context, snapshot) {
