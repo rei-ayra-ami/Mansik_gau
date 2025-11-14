@@ -13,13 +13,13 @@ class _SearchScreenState extends State<SearchScreen> {
   final List<Map<String, String>> _allItems = [
     // Items
     {
-      'name': 'Sad Onion',
+      'name': 'Грустный лук',
       'description': '↑ Скорость стрельбы',
       'type': 'Item',
       'image': 'assets/images/items/sad_onion.png'
     },
     {
-      'name': 'Pentagram',
+      'name': 'Пентаграмма',
       'description': '↑ Урон + злой облик',
       'type': 'Item',
       'image': 'assets/images/items/pentagram.png'
@@ -27,27 +27,51 @@ class _SearchScreenState extends State<SearchScreen> {
 
     // Bosses
     {
-      'name': 'Monstro',
+      'name': 'Монстро',
       'description': 'Первый босс. Прыгает и плюёт кровью.',
       'type': 'Boss',
       'image': 'assets/images/bosses/monstro.png'
     },
     {
-      'name': 'Isaac',
+      'name': 'Исаак',
       'description': 'Финальный бой с самим собой.',
       'type': 'Boss',
       'image': 'assets/images/bosses/isaac.png'
     },
+    {
+      'name': 'Близнецы',
+      'description': 'Пара, где один преследует, а другой резко атакует.',
+      'type': 'Boss',
+      'image': 'assets/images/bosses/gemini.png'
+    },
+    {
+      'name': 'Стивен',
+      'description': 'Летающий босс, выпускающий рой мух для атаки игрока.',
+      'type': 'Boss',
+      'image': 'assets/images/bosses/steven.png'
+    },
+    {
+      'name': 'Ларри Младший',
+      'description': 'Маленький червяк, быстро ползущий и атакующий игрока прямым столкновением.',
+      'type': 'Boss',
+      'image': 'assets/images/bosses/larry_jr.png'
+    },
+    {
+      'name': 'Герцог мух',
+      'description': 'Большой летающий босс, выпускающий рой мух для атаки игрока.',
+      'type': 'Boss',
+      'image': 'assets/images/bosses/duke_of_flies.png'
+    },
 
     // Characters
     {
-      'name': 'Isaac',
+      'name': 'Исаак',
       'description': 'Начальный персонаж, сбалансированные характеристики.',
       'type': 'Character',
       'image': 'assets/images/characters/isaac.png'
     },
     {
-      'name': 'Magdalene',
+      'name': 'Магдалена',
       'description': 'Больше здоровья, но меньше скорости.',
       'type': 'Character',
       'image': 'assets/images/characters/magdalene.png'

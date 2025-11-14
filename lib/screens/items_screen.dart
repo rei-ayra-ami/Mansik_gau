@@ -15,7 +15,7 @@ class ItemsScreen extends StatelessWidget {
             height: 50,
           ),
           title: const Text(
-            'Sad Onion',
+            'Грустный лук',
             style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
           ),
           subtitle: const Text(
@@ -31,7 +31,7 @@ class ItemsScreen extends StatelessWidget {
             height: 50,
           ),
           title: const Text(
-            'Pentagram',
+            'Пентаграмма',
             style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
           ),
           subtitle: const Text(
