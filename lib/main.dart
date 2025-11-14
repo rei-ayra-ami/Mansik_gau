@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_screen.dart';
 import 'screens/form_screen.dart';
+import 'firebase_options.dart'; // файл сгенерируется через flutterfire
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const IsaacWikiApp());
 }
 
@@ -27,7 +33,7 @@ class IsaacWikiApp extends StatelessWidget {
       title: 'The Binding of Isaac Wiki',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'MyFont', // глобальный шрифт для всего приложения
+        fontFamily: 'MyFont',
         primarySwatch: Colors.red,
         scaffoldBackgroundColor: Colors.black,
         textTheme: const TextTheme(
@@ -36,9 +42,9 @@ class IsaacWikiApp extends StatelessWidget {
           bodySmall: TextStyle(color: Colors.white60),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor:Colors.black87,
+          backgroundColor: Colors.black87,
           titleTextStyle: TextStyle(
-            fontFamily: 'MyFont', // шрифт для AppBar
+            fontFamily: 'MyFont',
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.white,

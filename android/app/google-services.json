@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "751123895130",
+    "project_id": "isaac-wiki-8cef9",
+    "storage_bucket": "isaac-wiki-8cef9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751123895130:android:e9eedd6715887010601963",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmpnkH_6Oq0YSPNXuGRLH9lAUUAflaUDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
   late final AnimationController _animationController;
   late final Animation<double> _fadeAnimation;
 
-  final List<Widget> _screens = const [
+  final List<Widget> _screens = [
     ItemsScreen(),
     BossesScreen(),
     CharactersScreen(),
